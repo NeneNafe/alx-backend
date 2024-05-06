@@ -7,11 +7,7 @@ import csv
 import math
 from typing import List, Tuple
 
-
-def index_range(page: int, page_size: int) -> Tuple[int, int]:
-    start = (page - 1) * page_size
-    end = start + page_size
-    return (start, end)
+index_range = __import__('0-simple_helper_function').index_range
 
 
 class Server:
@@ -36,14 +32,16 @@ class Server:
     def get_page(self, page: int = 1, page_size: int = 10) -> List[List]:
         """takes two integer arguments page with default value 1 and
         page_size with default value 10"""
-        assert isinstance(page, int) and page > 0, "must be a positive integer"
-        assert isinstance(page_size, int) and page_size > 0
+        assert isinstance(page, int) and isinstance(page_size, int)
+        assert page > 0 and page_size > 0
 
         data = self.dataset()
 
-        start, end = index_range(page, page_size)
+        indices = index_range(page, page_size)
+        start = indices[0]
+        end = indices[1]
 
-        if start >= len(data):
+        try:
+            return data[start:end]
+        except IndexError:
             return []
-
-        return data[start:end]
