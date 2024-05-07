@@ -8,8 +8,8 @@ class FIFOCache(BaseCaching):
     """inherits from BaseCaching and is a caching system"""
     def __init__(self):
         """ Initialize the cache and an insertion order list"""
-        self.queue = []
         super().__init__()
+        self.queue = []
 
     def put(self, key, item):
         """assign to the dictionary self.cache_data"""
@@ -21,7 +21,7 @@ class FIFOCache(BaseCaching):
             if len(self.queue) > self.MAX_ITEMS:
                 delete = self.queue.pop(0)
                 self.cache_data.pop(delete)
-                print('DISCARD : {}'.format(delete))
+                print('DISCARD: {}'.format(delete))
 
     def get(self, key):
         """returns the value in self.cache_data linked to key"""
