@@ -8,8 +8,8 @@ class FIFOCache(BaseCaching):
     """inherits from BaseCaching and is a caching system"""
     def __init__(self):
         """ Initialize the cache and an insertion order list"""
-        super().__init__()
         self.queue = []
+        super().__init__()
 
     def put(self, key, item):
         """assign to the dictionary self.cache_data"""
