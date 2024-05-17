@@ -48,15 +48,24 @@ def get_locale():
     """ gets the best match for the languages selected """
     locale = request.args.get('locale')
     if locale in app.config['LANGUAGES']:
-        print(locale)
         return locale
+
+    if g.user:
+        locale = g.user.get('locale')
+        if locale and locale in app.config['LANGUAGES']:
+            return locale
+
+    locale = request.headers.get('locale', None)
+    if locale in app.config['LANGUAGES']:
+        return locale
+
     return request.accept_languages.best_match(app.config['LANGUAGES'])
 
 
 @app.route('/')
 def index():
     """ prints Hello World """
-    return render_template('5-index.html')
+    return render_template('6-index.html')
 
 
 if __name__ == "__main__":
