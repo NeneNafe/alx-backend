@@ -6,8 +6,10 @@ from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
+
 @app.route('/')
 def index():
+    """ prints Hello World """
     return render_template('0-index.html')
 
 
